@@ -20,6 +20,4 @@ typedef struct afd{
 
 } afd;
 
-int verifica_existencia(char **comp, int x, char *e);
-
 #endif
