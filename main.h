@@ -1,10 +1,10 @@
 #ifndef MAIN_H
 #define MAIN_H
-
+#define tam 25
 typedef struct transicao{
-    char *origem;
-    char *destino;
-    char *ler;
+    char origem[tam];
+    char destino[tam];
+    char ler[tam];
 }transicao;
 
 typedef struct afd{

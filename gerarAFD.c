@@ -21,16 +21,11 @@ void cria_AFD(afd *entrada, FILE *afd_arq){
     }
     
     fscanf(afd_arq, "%d", &entrada->qtd_transicoes);
-    
+   
     entrada->transicao = calloc(sizeof(transicao), entrada->qtd_transicoes);
     for (int i = 0; i < entrada->qtd_transicoes; i++){
-        entrada->transicao[i].destino = calloc(20,sizeof(char));
-    entrada->transicao[i].ler = calloc(2,sizeof(char));
-    entrada->transicao[i].destino = calloc(20,sizeof(char));
-    }
-    for (int i = 0; i < entrada->qtd_transicoes; i++){
         fscanf(afd_arq, "%s%s%s", entrada->transicao[i].origem, entrada->transicao[i].ler, entrada->transicao[i].destino);
-        printf("%s \n", entrada->transicao[i].origem);
+        
     } 
     
     entrada->estado_inicial = calloc(sizeof(entrada->estado_inicial),20);
@@ -47,8 +42,6 @@ void cria_AFD(afd *entrada, FILE *afd_arq){
 }
 
 void visualizacao(afd *saida){
-    
-     
     FILE* arquivo = fopen("/home/jonatas/Jonatas/VSCODE/FTC/afd.txt","w");
     fprintf(arquivo, "digraph finite_state_machine {\n");
     fprintf(arquivo, "\tfontname=\"Helvetica,Arial,sans-serif\"\n");
@@ -56,23 +49,18 @@ void visualizacao(afd *saida){
     fprintf(arquivo, "\tedge [fontname=\"Helvetica,Arial,sans-serif\"]\n");
     fprintf(arquivo, "\tnode [shape = point ]; qi");
     fprintf(arquivo, "\trankdir=LR;\n");
+
     fprintf(arquivo, "\tnode [shape = doublecircle, width=.75, height=.5];");
     for (int i = 0; i < saida->qtd_estados_finais; i++){
         fprintf(arquivo, "%s ", saida->estados_finais[i]);
     }
-    
-   
-   
     fprintf(arquivo,";\n");
     fprintf(arquivo, "\tnode [shape = circle,width=.75, height=.05];\n");
     fprintf(arquivo, "\tqi -> %s;\n", saida->estado_inicial);
-   for (int i = 0; i < saida->qtd_transicoes; i++){
+    for (int i = 0; i < saida->qtd_transicoes; i++){
         fprintf(arquivo,"\t%s -> %s [label = \"%s\"];\n", saida->transicao[i].origem, saida->transicao[i].destino,saida->transicao[i].ler);
-        //printf("%s %s %s\n", saida->transicao[i].origem, saida->transicao[i].destino,saida->transicao[i].ler);
-        //scanf("%d",&x);
-        
-        
     }
+     
     fprintf(arquivo,"}");
     fclose(arquivo);
 }
