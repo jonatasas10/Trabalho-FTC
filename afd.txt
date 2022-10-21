@@ -3,19 +3,31 @@ digraph finite_state_machine {
 	node [fontname="Helvetica,Arial,sans-serif"]
 	edge [fontname="Helvetica,Arial,sans-serif"]
 	node [shape = point ]; qi	rankdir=LR;
-	node [shape = doublecircle, width=.75, height=.5];;
+	node [shape = doublecircle, width=.75, height=.5];par0 par1 par2 par3 par4 par5 impar0 ;
 	node [shape = circle,width=.75, height=.05];
-	qi -> 0;
-	(null) ->  [label = ""];
-	(null) ->  [label = ""];
-	(null) ->  [label = ""];
-	(null) ->  [label = ""];
-	(null) ->  [label = ""];
-	(null) ->  [label = ""];
-	(null) ->  [label = ""];
-	(null) ->  [label = ""];
-	(null) ->  [label = ""];
-	(null) ->  [label = ""];
-	(null) ->  [label = ""];
-	(null) ->  [label = ""];
+	qi -> par0;
+	par0 -> impar0 [label = "0"];
+	par1 -> impar2 [label = "0"];
+	par2 -> impar4 [label = "0"];
+	par3 -> impar0 [label = "0"];
+	par4 -> impar2 [label = "0"];
+	par5 -> impar4 [label = "0"];
+	par0 -> impar1 [label = "1"];
+	par1 -> impar3 [label = "1"];
+	par2 -> impar5 [label = "1"];
+	par3 -> impar1 [label = "1"];
+	par4 -> impar3 [label = "1"];
+	par5 -> impar5 [label = "1"];
+	impar0 -> par0 [label = "0"];
+	impar1 -> par2 [label = "0"];
+	impar2 -> par4 [label = "0"];
+	impar3 -> par0 [label = "0"];
+	impar4 -> par2 [label = "0"];
+	impar5 -> par4 [label = "0"];
+	impar0 -> par1 [label = "1"];
+	impar1 -> par3 [label = "1"];
+	impar2 -> par5 [label = "1"];
+	impar3 -> par1 [label = "1"];
+	impar4 -> par3 [label = "1"];
+	impar5 -> par5 [label = "1"];
 }

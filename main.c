@@ -4,76 +4,20 @@
 #include "main.h"
 #include "complemento.h"
 #include "gerarAFD.h"
-
-afd *produto(afd *afd1, afd *afd2){
-    afd *afd3 = calloc(1,sizeof(afd));
-    afd3->qtd_estados = (afd1->qtd_estados)*(afd2->qtd_estados);
-    afd3->estado = calloc(afd3->qtd_estados, sizeof(*afd3->estado));
-    
-    afd3->estado_inicial = calloc(20,sizeof(afd3->estado_inicial));
-    
-    for (int i = 0; i < afd3->qtd_estados; i++) afd3->estado[i] = calloc(50, sizeof(afd3->estado));
-    afd3->qtd_alfabeto = afd1->qtd_alfabeto;
-    afd3->alfabeto = afd1->alfabeto;
-    int conta = 0;
-
-    for (int i = 0; i < afd1->qtd_estados; i++){
-    
-        for (int j = 0; j < afd2->qtd_estados; j++){
-            
-            strcpy(afd3->estado[conta], afd1->estado[i]);
-            strcat(afd3->estado[conta], afd2->estado[j]);
-            conta++;
-        }
-
-    }
-    strcpy(afd3->estado_inicial, afd3->estado[0]);
-    afd3->qtd_estados_finais = 1;
-    afd3->estados_finais = calloc(1,sizeof(*afd3->estados_finais));
-    afd3->estados_finais[0] = calloc(1,sizeof(afd3->estados_finais[0]));
-    strcpy(afd3->estados_finais[0], afd3->estado_inicial);
-    
-    int qtd_transicao = 0;
-    
-    afd3->transicao = calloc(50,sizeof(*afd3->transicao));
-    
-    for (int i = 0; i < afd1->qtd_transicoes; i++){
-        
-        for (int j = 0; j < afd2->qtd_transicoes; j++){
-
-            if (strcmp(afd1->transicao[i].ler, afd2->transicao[j].ler) == 0){
-
-                strcpy(afd3->transicao[qtd_transicao].origem, afd1->transicao[i].origem);
-                strcat(afd3->transicao[qtd_transicao].origem, afd2->transicao[j].origem);
-                
-                strcpy(afd3->transicao[qtd_transicao].ler, afd2->transicao[j].ler);
-                
-                
-                strcpy(afd3->transicao[qtd_transicao].destino, afd1->transicao[i].destino);
-                strcat(afd3->transicao[qtd_transicao].destino, afd2->transicao[j].destino);
-
-                qtd_transicao++;               
-                                            
-            }           
-
-        }
-         
-    }
-
-    afd3->qtd_transicoes = qtd_transicao;
-
-    return afd3;
-}
+#include "produto.h"
 
 int main(){
     FILE *AFD1 = fopen("/home/jonatas/Jonatas/VSCODE/FTC/AFD.txt", "r");
     FILE *AFD2 = fopen("/home/jonatas/Jonatas/VSCODE/FTC/AFD2.txt", "r");
+    
     afd *afd1 = calloc(1,sizeof(afd));
     afd *afd2 = calloc(1,sizeof(afd));
     cria_AFD(afd1, AFD1);
     cria_AFD(afd2, AFD2);
     afd *afd3 = produto(afd1,afd2);
+    uniao(afd3, afd1, afd2);
     //complemento(nome);
+    //intersecao(afd3,afd1,afd2);
     visualizacao(afd3);
 
     libera_memoria(afd1);
@@ -85,13 +29,32 @@ int main(){
 }
 
 void libera_memoria(afd *afd){
-    for (int i = 0; i < afd->qtd_estados; i++) free(afd->estado[i]);
-    free(afd->estado);
-    for (int i = 0; i < afd->qtd_alfabeto; i++) free(afd->alfabeto[i]);
-    free(afd->alfabeto);
-    for (int i = 0; i < afd->qtd_estados_finais; i++) free(afd->estados_finais[i]);
-    free(afd->estados_finais);
-    free(afd->estado_inicial);
-    free(afd->transicao);
-    free(afd);
+    if (afd->estado != NULL){
+        for (int i = 0; i < afd->qtd_estados; i++) free(afd->estado[i]);
+        free(afd->estado);
+        afd->estado = NULL;
+    }
+    if (afd->alfabeto != NULL){
+        for (int i = 0; i < afd->qtd_alfabeto; i++) free(afd->alfabeto[i]);
+        free(afd->alfabeto);
+        afd->alfabeto= NULL;
+    }
+    if (afd->estados_finais != NULL){
+        for (int i = 0; i < afd->qtd_estados_finais; i++) free(afd->estados_finais[i]);
+        free(afd->estados_finais);
+        afd->estados_finais = NULL;
+    }
+    if (afd->estado_inicial != NULL){
+        free(afd->estado_inicial);
+        afd->estado_inicial = NULL;
+    }
+    if (afd->transicao != NULL){
+            free(afd->transicao);
+            afd->transicao = NULL;
+    }
+    if (afd != NULL){
+        free(afd);
+        afd = NULL;
+    }
+    
 }

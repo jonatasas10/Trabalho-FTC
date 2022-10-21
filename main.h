@@ -1,6 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 #define tam 25
+
 typedef struct transicao{
     char origem[tam];
     char destino[tam];
