@@ -2,9 +2,9 @@
 #define MAIN_H
 
 typedef struct transicao{
-    char origem[20];
-    char destino[20];
-    char ler [2];
+    char *origem;
+    char *destino;
+    char *ler;
 }transicao;
 
 typedef struct afd{
@@ -20,4 +20,5 @@ typedef struct afd{
 
 } afd;
 
+void libera_memoria(afd *afd);
 #endif
