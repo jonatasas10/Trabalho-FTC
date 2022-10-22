@@ -2,6 +2,11 @@
 #define MAIN_H
 #define tam 25
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
 typedef struct transicao{
     char origem[tam];
     char destino[tam];
