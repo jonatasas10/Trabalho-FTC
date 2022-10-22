@@ -6,6 +6,7 @@ void cria_AFD(afd *entrada, FILE *afd_arq){
     entrada->estado = calloc(sizeof(*entrada->estado),entrada->qtd_estados);
    
     for (int i = 0; i < entrada->qtd_estados; i++){
+        
         entrada->estado[i] = calloc(sizeof(entrada->estado),20);
         fscanf(afd_arq, "%s", entrada->estado[i]);
     }
