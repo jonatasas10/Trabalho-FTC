@@ -70,10 +70,13 @@ afd *produto(afd *afd1, afd *afd2){
     return afd3;
 }
 
-void uniao(afd *afdproduto, afd *afd1, afd *afd2){
-    int conta = 1;
+afd  *uniao(afd *afdproduto, afd *afd1, afd *afd2){
+    
+    afdproduto = produto(afd1,afd2);
     afdproduto->estados_finais = calloc(1, sizeof(*afdproduto->estados_finais));
     
+    int conta = 1;
+
     for (int i = 0; i < afdproduto->qtd_estados; i++){
     
         for (int j = 0; j < afd1->qtd_estados_finais; j++){
@@ -106,13 +109,18 @@ void uniao(afd *afdproduto, afd *afd1, afd *afd2){
         }
     }
     afdproduto->qtd_estados_finais = conta-1;
+
+    return afdproduto;
 }
 
-void intersecao(afd *afdproduto, afd *afd1, afd *afd2){
-    int conta = 1;
-    char A [25];
+afd *intersecao(afd *afdproduto, afd *afd1, afd *afd2){
+    
+    afdproduto = produto(afd1, afd2);
     afdproduto->estados_finais = calloc(1, sizeof(*afdproduto->estados_finais));
     
+    int conta = 1;
+    char A [25];
+
     for (int i = 0; i < afdproduto->qtd_estados; i++){
         
         for (int j = 0; j < afd1->qtd_estados_finais; j++){

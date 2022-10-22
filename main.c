@@ -14,10 +14,10 @@ int main(){
     afd *afd2 = calloc(1,sizeof(afd));
     cria_AFD(afd1, AFD1);
     cria_AFD(afd2, AFD2);
-    afd *afd3 = produto(afd1,afd2);
-    uniao(afd3, afd1, afd2);
+    //afd *afd3 = produto(afd1,afd2);
+    //afd *afd3 = uniao(afd3, afd1, afd2);
     //complemento(nome);
-    //intersecao(afd3,afd1,afd2);
+    afd *afd3 = intersecao(afd3,afd1,afd2);
     visualizacao(afd3);
 
     libera_memoria(afd1);

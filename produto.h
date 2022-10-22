@@ -4,8 +4,8 @@
 
 afd *produto(afd *afd1, afd *afd2);
 
-void uniao(afd *afdproduto, afd *afd1, afd *afd2);
+afd *uniao(afd *afdproduto, afd *afd1, afd *afd2);
 
-void intersecao(afd *afdproduto, afd *afd1, afd *afd2);
+afd *intersecao(afd *afdproduto, afd *afd1, afd *afd2);
 
 #endif
