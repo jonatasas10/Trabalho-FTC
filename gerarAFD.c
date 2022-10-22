@@ -44,6 +44,8 @@ void cria_AFD(afd *entrada, FILE *afd_arq){
     }        
 }
 
+
+
 void visualizacao(afd *saida){
     
     FILE* arquivo = fopen("/home/jonatas/Jonatas/VSCODE/FTC/afd.txt","w");
@@ -57,7 +59,7 @@ void visualizacao(afd *saida){
     fprintf(arquivo, "\tnode [shape = doublecircle, width=.75, height=.5];");
     
     for (int i = 0; i < saida->qtd_estados_finais; i++){
-    
+        
         fprintf(arquivo, "%s ", saida->estados_finais[i]);
     }
     fprintf(arquivo,";\n");

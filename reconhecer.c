@@ -7,6 +7,7 @@ char* _delta(afd *afd1, char* estado_atual, char *simbolo){
     
         if((strcmp(estado_atual, afd1->transicao[i].origem) == 0)
             && (strcmp(simbolo, afd1->transicao[i].ler)) == 0){
+            
             return afd1->transicao[i].destino;
         }
     }
@@ -14,13 +15,16 @@ char* _delta(afd *afd1, char* estado_atual, char *simbolo){
 }
 
 int _reconhecer(afd *afd1, char *palavra){
+    
     char *estado_atual;
     char *estado_temp;
     char ler_temp[2];
     ler_temp[1] = '\0';
 
     estado_atual = afd1->estado_inicial;
+    
     for (int i = 0; i < strlen(palavra); ++i) {
+        
         ler_temp[0] = palavra[i];
         
         estado_temp = _delta(afd1, estado_atual, ler_temp);
@@ -46,9 +50,4 @@ int _reconhecer(afd *afd1, char *palavra){
 
     // Caso nao for, retorna falso
     return 0;
-}
-
-int reconhecer_palavra(afd *afd1, char* palavra){
-    
-    return _reconhecer(afd1, palavra);
 }
