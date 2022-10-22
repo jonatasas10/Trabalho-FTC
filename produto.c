@@ -67,7 +67,7 @@ afd *produto(afd *afd1, afd *afd2){
     return afd3;
 }
 
-afd  *uniao(afd *afdproduto, afd *afd1, afd *afd2){
+afd *uniao(afd *afdproduto, afd *afd1, afd *afd2){
     
     afdproduto = produto(afd1,afd2);
     afdproduto->estados_finais = calloc(1, sizeof(*afdproduto->estados_finais));
@@ -80,26 +80,25 @@ afd  *uniao(afd *afdproduto, afd *afd1, afd *afd2){
     
             for (int k = 0; k < afd2->qtd_estados_finais; k++){
 
-                if (strstr(afdproduto->estado[i], afd1->estados_finais[j])){
-                    
-                    if (strcmp(afdproduto->estado[i], strstr(afdproduto->estado[i], afd1->estados_finais[j])) == 0){
+                if (strstr(afdproduto->estado[i], afd1->estados_finais[j])
+                    && strcmp(afdproduto->estado[i], strstr(afdproduto->estado[i], afd1->estados_finais[j])) == 0 ){                                       
                         
-                        afdproduto->estados_finais[conta-1] = calloc(25, sizeof(afdproduto->estados_finais));
-                        strcpy(afdproduto->estados_finais[conta-1], afdproduto->estado[i]);
-                        conta++;
-                        afdproduto->estados_finais = realloc(afdproduto->estados_finais, conta*sizeof(*afdproduto->estados_finais));
-                        break;
-                    }
+                    afdproduto->estados_finais[conta-1] = calloc(25, sizeof(afdproduto->estados_finais));
+                    strcpy(afdproduto->estados_finais[conta-1], afdproduto->estado[i]);
+                    conta++;
+                    afdproduto->estados_finais = realloc(afdproduto->estados_finais, 
+                                                        conta*sizeof(*afdproduto->estados_finais));
+                    break;
+                
                 }
-                if (strstr(afdproduto->estado[i], afd2->estados_finais[k])){
-                   
-                    if (strcmp(afd2->estados_finais[k], strstr(afdproduto->estado[i], afd2->estados_finais[k])) == 0){
-                        
-                        afdproduto->estados_finais[conta-1] = calloc(25, sizeof(afdproduto->estados_finais));
-                        strcpy(afdproduto->estados_finais[conta-1], afdproduto->estado[i]);
-                        conta++;
-                        afdproduto->estados_finais = realloc(afdproduto->estados_finais, conta*sizeof(*afdproduto->estados_finais));
-                    }
+                if (strstr(afdproduto->estado[i], afd2->estados_finais[k]) 
+                    && strcmp(afd2->estados_finais[k], strstr(afdproduto->estado[i], afd2->estados_finais[k])) == 0){
+                                                             
+                    afdproduto->estados_finais[conta-1] = calloc(25, sizeof(afdproduto->estados_finais));
+                    strcpy(afdproduto->estados_finais[conta-1], afdproduto->estado[i]);
+                    conta++;
+                    afdproduto->estados_finais = realloc(afdproduto->estados_finais, 
+                                                        conta*sizeof(*afdproduto->estados_finais));                   
                 }               
     
             }
@@ -132,10 +131,10 @@ afd *intersecao(afd *afdproduto, afd *afd1, afd *afd2){
                     afdproduto->estados_finais[conta-1] = calloc(25, sizeof(afdproduto->estados_finais));
                     strcpy(afdproduto->estados_finais[conta-1], afdproduto->estado[i]);
                     conta++;
-                    afdproduto->estados_finais = realloc(afdproduto->estados_finais, conta*sizeof(*afdproduto->estados_finais));           
+                    afdproduto->estados_finais = realloc(afdproduto->estados_finais, 
+                                                        conta*sizeof(*afdproduto->estados_finais));           
                 }
-            }                
-    
+            }                   
         }
     }
     
