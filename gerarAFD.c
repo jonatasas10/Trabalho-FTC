@@ -60,7 +60,6 @@ void visualizacao(afd *saida){
     
         fprintf(arquivo, "%s ", saida->estados_finais[i]);
     }
-    
     fprintf(arquivo,";\n");
     fprintf(arquivo, "\tnode [shape = circle,width=.75, height=.05];\n");
     fprintf(arquivo, "\tqi -> %s;\n", saida->estado_inicial);
