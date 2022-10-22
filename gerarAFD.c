@@ -7,7 +7,7 @@ void cria_AFD(afd *entrada, FILE *afd_arq){
    
     for (int i = 0; i < entrada->qtd_estados; i++){
         
-        entrada->estado[i] = calloc(sizeof(entrada->estado),20);
+        entrada->estado[i] = calloc(sizeof(entrada->estado),25);
         fscanf(afd_arq, "%s", entrada->estado[i]);
     }
 
@@ -31,7 +31,7 @@ void cria_AFD(afd *entrada, FILE *afd_arq){
         
     } 
     
-    entrada->estado_inicial = calloc(sizeof(entrada->estado_inicial),20);
+    entrada->estado_inicial = calloc(sizeof(entrada->estado_inicial),25);
     fscanf(afd_arq, "%s", entrada->estado_inicial);
 
     fscanf(afd_arq, "%d", &entrada->qtd_estados_finais);
@@ -39,7 +39,7 @@ void cria_AFD(afd *entrada, FILE *afd_arq){
     
     for (int i = 0; i < entrada->qtd_estados_finais; i++){
         
-        entrada->estados_finais[i] = calloc(sizeof(entrada->estados_finais[i]),20);
+        entrada->estados_finais[i] = calloc(sizeof(entrada->estados_finais[i]),25);
         fscanf(afd_arq, "%s", entrada->estados_finais[i]);
     }        
 }
