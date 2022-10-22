@@ -7,7 +7,7 @@ void complemento (afd *afd){
     
     for (int i = 0; i < diferenca; i++){
     
-        estados_finais_c[i] = calloc(sizeof(char), 20);
+        estados_finais_c[i] = calloc(sizeof(char), 25);
     }
     
     int i,j,contador =0;
@@ -24,22 +24,24 @@ void complemento (afd *afd){
 
             if (!(verifica_existencia(estados_finais_c, contador, afd->estado[i]))){
                 
-                *estados_finais_c[contador] = *afd->estado[i];
+                strcpy(estados_finais_c[contador], afd->estado[i]);
                 contador++;
             }
-        }
-        
+        }       
     }
     for(int i = 0; i < afd->qtd_estados_finais; i++) free(afd->estados_finais[i]);
+    
     free(afd->estados_finais);
+    
     afd->estados_finais = estados_finais_c;
+
     afd->qtd_estados_finais = diferenca;
-    
-    
+       
 }
 int verifica_existencia(char **comp, int x, char *e){
     
     for (int i = 0; i < x; i++){
+        
         if (strcmp(e, comp[i]) == 0) return 1;
     }
     return 0;
