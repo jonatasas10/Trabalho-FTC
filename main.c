@@ -1,10 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "main.h"
 #include "complemento.h"
 #include "gerarAFD.h"
 #include "produto.h"
+#include "reconhecer.h"
 
 int main(){
     FILE *AFD1 = fopen("/home/jonatas/Jonatas/VSCODE/FTC/AFD.txt", "r");
@@ -17,12 +15,13 @@ int main(){
     //afd *afd3 = produto(afd1,afd2);
     //afd *afd3 = uniao(afd3, afd1, afd2);
     //complemento(nome);
-    afd *afd3 = intersecao(afd3,afd1,afd2);
-    visualizacao(afd3);
+    //afd *afd3 = intersecao(afd3,afd1,afd2);
+    printf("RESULTADO %d\n", _reconhecer(afd1, "101010"));
+    //visualizacao(afd3);
 
     libera_memoria(afd1);
     libera_memoria(afd2);
-    libera_memoria(afd3);
+    //libera_memoria(afd3);
     fclose(AFD1);
     fclose(AFD2);
     return 0;

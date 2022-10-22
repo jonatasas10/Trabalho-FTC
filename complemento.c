@@ -1,14 +1,15 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "complemento.h"
 
 void complemento (afd *afd){
+    
     int diferenca = afd->qtd_estados - afd->qtd_estados_finais;
     char **estados_finais_c = calloc(sizeof(char*),diferenca);
+    
     for (int i = 0; i < diferenca; i++){
+    
         estados_finais_c[i] = calloc(sizeof(char), 20);
     }
+    
     int i,j,contador =0;
 
     for (i = 0; i < afd->qtd_estados; i++){
@@ -22,6 +23,7 @@ void complemento (afd *afd){
         if (j == afd->qtd_estados_finais){
 
             if (!(verifica_existencia(estados_finais_c, contador, afd->estado[i]))){
+                
                 *estados_finais_c[contador] = *afd->estado[i];
                 contador++;
             }

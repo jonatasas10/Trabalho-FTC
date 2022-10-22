@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "produto.h"
 
 afd *produto(afd *afd1, afd *afd2){

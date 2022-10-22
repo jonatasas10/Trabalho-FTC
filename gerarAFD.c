@@ -1,7 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "gerarAFD.h"
+
 void cria_AFD(afd *entrada, FILE *afd_arq){
 
     fscanf(afd_arq, "%d", &entrada->qtd_estados);
