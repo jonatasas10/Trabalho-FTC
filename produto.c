@@ -1,6 +1,7 @@
 #include "produto.h"
 
 afd *produto(afd *afd1, afd *afd2){
+    
     afd *afd3 = calloc(1,sizeof(afd));
     afd3->qtd_estados = (afd1->qtd_estados)*(afd2->qtd_estados);
     afd3->estado = calloc(afd3->qtd_estados, sizeof(*afd3->estado));
@@ -37,7 +38,7 @@ afd *produto(afd *afd1, afd *afd2){
     
     int qtd_transicao = 0;
     
-    afd3->transicao = calloc(50,sizeof(*afd3->transicao));
+    afd3->transicao = calloc(100,sizeof(*afd3->transicao));
     
     for (int i = 0; i < afd1->qtd_transicoes; i++){
         

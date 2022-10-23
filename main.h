@@ -26,5 +26,10 @@ typedef struct afd{
 
 } afd;
 
+typedef struct conjuntos{
+    char **estado;
+} conjuntos;
+
 void libera_memoria(afd *afd);
+int verifica(afd *min, char *E, char *e, char **conjunto, int TAM, int tamc);
 #endif

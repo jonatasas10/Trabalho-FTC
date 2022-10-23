@@ -41,7 +41,7 @@ void complemento (afd *afd){
 int verifica_existencia(char **comp, int x, char *e){
     
     for (int i = 0; i < x; i++){
-        
+        //printf("CONJ %s\n", comp[i]);
         if (strcmp(e, comp[i]) == 0) return 1;
     }
     return 0;
