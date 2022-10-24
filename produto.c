@@ -140,4 +140,5 @@ afd *intersecao(afd *afdproduto, afd *afd1, afd *afd2){
     }
     
     afdproduto->qtd_estados_finais = conta-1;
+    return afdproduto;
 }

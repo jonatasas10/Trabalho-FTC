@@ -32,4 +32,6 @@ typedef struct conjuntos{
 
 void libera_memoria(afd *afd);
 int verifica(afd *min, char *E, char *e, char **conjunto, int TAM, int tamc);
+void atualiza_conjuntos(char **conjunto, int pos, int TAM);
+void mostra(conjuntos *conjuntos,int n, int *x);
 #endif

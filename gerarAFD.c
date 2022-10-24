@@ -44,11 +44,38 @@ void cria_AFD(afd *entrada, FILE *afd_arq){
     }        
 }
 
-
-
-void visualizacao(afd *saida){
+void saida(afd *afd1, char *afdsaida){
+    FILE *arq = fopen(afdsaida, "w");
+    fprintf(arq, "%d\n", afd1->qtd_estados);
     
-    FILE* arquivo = fopen("/home/jonatas/Jonatas/VSCODE/FTC/afd.txt","w");
+    for (int i = 0; i < afd1->qtd_estados; i++){
+        fprintf(arq, "%s\n",afd1->estado[i]);
+    }
+    
+    fprintf(arq, "%d\n", afd1->qtd_alfabeto);
+
+    for (int i = 0; i < afd1->qtd_alfabeto; i++){
+        fprintf(arq, "%s\n", afd1->alfabeto[i]);
+    }
+
+    fprintf(arq, "%d\n",afd1->qtd_transicoes);
+    
+    for (int i = 0; i < afd1->qtd_transicoes; i++){
+        fprintf(arq, "%s %s %s\n", afd1->transicao[i].origem, afd1->transicao[i].ler, afd1->transicao[i].destino);
+    }
+    fprintf(arq, "%s\n", afd1->estado_inicial);
+
+    fprintf(arq, "%d\n", afd1->qtd_estados_finais);
+    
+    for (int i = 0; i < afd1->qtd_estados_finais; i++){
+        fprintf(arq, "%s\n", afd1->estados_finais[i]);
+    }
+    fclose(arq);
+}
+
+void visualizacao(afd *saida, char *dot){
+    
+    FILE* arquivo = fopen(dot,"w");
     fprintf(arquivo, "digraph finite_state_machine {\n");
     fprintf(arquivo, "\tfontname=\"Helvetica,Arial,sans-serif\"\n");
     fprintf(arquivo, "\tnode [fontname=\"Helvetica,Arial,sans-serif\"]\n");
