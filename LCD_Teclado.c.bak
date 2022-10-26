@@ -1,0 +1,113 @@
+/*
+ * File:   Teste_LCD.c
+ * Author: Marcelo
+ *
+ * Created on 22 de Março de 2021, 20:23
+ */
+
+// PIC16F628A Configuration Bit Settings
+
+// 'C' source line config statements
+
+// CONFIG
+#pragma config FOSC = INTOSCIO  // Oscillator Selection bits (INTOSC oscillator: I/O function on RA6/OSC2/CLKOUT pin, I/O function on RA7/OSC1/CLKIN)
+#pragma config WDTE = OFF       // Watchdog Timer Enable bit (WDT disabled)
+#pragma config PWRTE = OFF      // Power-up Timer Enable bit (PWRT disabled)
+#pragma config MCLRE = ON      // RA5/MCLR/VPP Pin Function Select bit (RA5/MCLR/VPP pin function is digital input, MCLR internally tied to VDD)
+#pragma config BOREN = OFF      // Brown-out Detect Enable bit (BOD disabled)
+#pragma config LVP = OFF        // Low-Voltage Programming Enable bit (RB4/PGM pin has digital I/O function, HV on MCLR must be used for programming)
+#pragma config CPD = OFF        // Data EE Memory Code Protection bit (Data memory code protection off)
+#pragma config CP = OFF         // Flash Program Memory Code Protection bit (Code protection off)
+
+// #pragma config statements should precede project file includes.
+// Use project enums instead of #define for ON and OFF.
+
+#include <xc.h>
+#define _XTAL_FREQ 4000000 // 4MHz
+
+#include "lcd.h"
+#include "teclado.h"
+
+void main(void) {
+    unsigned char i;
+    unsigned char tecla;
+
+    PCONbits.OSCF = 1; // OSCF: INTOSC Oscillator Frequency bit. 1 = 4 MHz typical
+
+    TRISA = 0x30;
+    TRISB = 0xE7;
+
+    PORTA = 0xFE;
+    PORTB = 0x00;
+
+    lcd_init();
+
+    while (1) {
+        // Teste LCD
+        lcd_cmd(L_CLR);
+        lcd_cmd(L_L1);
+
+        for (i = 0; i < 16; i++) {
+            lcd_dat('A' + i);
+        }
+        lcd_cmd(L_L2);
+
+        for (i = 0; i < 16; i++) {
+            lcd_dat('a' + i);
+        }
+
+        __delay_ms(200);
+        lcd_cmd(L_CLR);
+        lcd_cmd(L_L1 + 3);
+        lcd_str("Teste LCD");
+
+        for (i = 32; i < 128; i++) {
+            if ((i % 16) == 0)lcd_cmd(L_L2);
+            lcd_dat(i);
+            __delay_ms(50);
+        }
+
+        __delay_ms(100);
+        lcd_cmd(L_CLR);
+        lcd_cmd(L_L1 + 3);
+        lcd_str("Teste LCD");
+        lcd_cmd(L_L2 + 7);
+        lcd_str("Ok");
+        __delay_ms(500);
+
+        //teste LEDS
+        lcd_cmd(L_CLR);
+        lcd_cmd(L_L1 + 1);
+        lcd_str("Teste LEDs");
+        __delay_ms(500);
+
+        for (i = 0; i < 4; i++) {
+            __delay_ms(300);
+            RA1 ^= 1;
+            __delay_ms(300);
+            RA2 ^= 1;
+            __delay_ms(300);
+            PORTA ^= 0x40; //RA6=1;
+            __delay_ms(300);
+            PORTA ^= 0x80; //RA7=1;
+            __delay_ms(300);
+        }
+
+
+        //teste Teclado
+        lcd_cmd(L_CLR);
+        lcd_cmd(L_L1 + 2);
+        lcd_str("Teste Teclado");
+
+        lcd_cmd(L_L2 + 1);
+
+        i = 0;
+        while (i < 14) {
+            tecla = tc_tecla(3000);
+            lcd_dat(tecla + 0x30);
+            i++;
+        }
+    }
+
+
+}
